@@ -1,0 +1,1232 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8;
+}
+
+header {
+  padding: 10px 0;
+  position: relative;
+  z-index: 100;
+}
+
+.navbar {
+  background-color: #333;
+}
+
+.navbar-brand img {
+  max-width: 100px;
+  height: auto;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  background-color: white;
+}
+
+.navbar-nav {
+  margin-left: auto;
+}
+
+.nav-item {
+  margin-right: 20px;
+}
+
+.nav-link {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #ffd700;
+}
+
+.logo img {
+  max-width: 100px;
+}
+
+.content-section {
+  padding: 20px;
+  display: none;
+}
+
+#home-content .welcome-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+#contacts-content {
+  display: block; /* or 'flex' or 'inline-block', etc. depending on your layout */
+}
+#deals-content {
+  display: block; /* or 'flex' or 'inline-block', etc. depending on your layout */
+}
+#leads-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  z-index: 999;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+body.leads-open header {
+  background-color: #fff; /* Change background color to white */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box-shadow for separation */
+  padding: 10px 0; /* Adjusted padding */
+}
+
+body.leads-open .navbar-dark .navbar-toggler-icon {
+  background-color: #333; /* Adjusted color for the toggler icon */
+}
+
+body.leads-open .nav-link {
+  color: #333; /* Adjusted color for navigation links */
+}
+
+body.leads-open .navbar-toggler {
+  border-color: #333; /* Adjusted color for the toggler border */
+}
+#filterButton,
+#refreshButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#filterButton img,
+#refreshButton img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#refreshButton:hover img {
+  filter: brightness(1.2);
+  transform: rotate(360deg);
+  transition: transform 0.3s ease;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.dropbtn {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 160px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f8f8f8;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.view-dropdown,
+#refreshButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.view-dropdown img,
+#refreshButton img {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.view-btn span {
+  margin-left: auto;
+}
+
+.view-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.view-dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.view-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.view-btn:hover + .view-dropdown-content {
+  display: block;
+}
+
+#createLeadButton,
+#actionButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 20px;
+}
+
+#createLeadButton {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#actionButton {
+  margin-right: 0;
+}
+
+#leadForm {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-height: 400px; /* Set a maximum height for the container */
+  overflow-y: auto;
+}
+
+#leadForm .column {
+  flex: 0 0 48%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#leadForm h3 {
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#leadForm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#leadForm input,
+#leadForm select {
+  width: calc(100% - 20px); /* Adjust width as needed */
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#leadForm input[type='checkbox'] {
+  width: auto;
+  margin-right: 5px;
+}
+
+#leadForm input:focus,
+#leadForm select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+#leadForm button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#leadForm button:hover {
+  background-color: #45a049;
+}
+/* CSS Styling */
+#deals-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  z-index: 999;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body.deals-open header {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+body.deals-open .navbar-dark .navbar-toggler-icon {
+  background-color: #333;
+}
+
+body.deals-open .nav-link {
+  color: #333;
+}
+
+body.deals-open .navbar-toggler {
+  border-color: #333;
+}
+
+#dealFilterButton,
+#dealRefreshButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#dealFilterButton img,
+#dealRefreshButton img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#dealRefreshButton:hover img {
+  filter: brightness(1.2);
+  transform: rotate(360deg);
+  transition: transform 0.3s ease;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.dropbtn {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 160px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f8f8f8;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.view-dropdown,
+#dealRefreshButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.view-dropdown img,
+#dealRefreshButton img {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.view-btn span {
+  margin-left: auto;
+}
+
+.view-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.view-dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.view-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.view-btn:hover + .view-dropdown-content {
+  display: block;
+}
+
+#createDealButton,
+#dealActionButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 20px;
+}
+
+#createDealButton {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#dealActionButton {
+  margin-right: 0;
+}
+
+#dealForm {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#dealForm .column {
+  flex: 0 0 48%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#dealForm h3 {
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#dealForm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#dealForm input,
+#dealForm select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#dealForm input[type='checkbox'] {
+  width: auto;
+  margin-right: 5px;
+}
+
+#dealForm input:focus,
+#dealForm select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+#dealForm button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#dealForm button:hover {
+  background-color: #45a049;
+}
+
+#accounts-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  z-index: 999;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body.accounts-open header {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+body.accounts-open .navbar-dark .navbar-toggler-icon {
+  background-color: #333;
+}
+
+body.accounts-open .nav-link {
+  color: #333;
+}
+
+body.accounts-open .navbar-toggler {
+  border-color: #333;
+}
+
+#accountFilterButton,
+#accountRefreshButton,
+#createAccountButton,
+#accountActionButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#accountFilterButton img,
+#accountRefreshButton img,
+#createAccountButton img,
+#accountActionButton img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#accountRefreshButton:hover img {
+  filter: brightness(1.2);
+  transform: rotate(360deg);
+  transition: transform 0.3s ease;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.dropbtn {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 160px;
+}
+
+.dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-content a:hover {
+  background-color: #f8f8f8;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.view-dropdown,
+#accountRefreshButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.view-dropdown img,
+#accountRefreshButton img {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.view-btn span {
+  margin-left: auto;
+}
+
+.view-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.view-dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.view-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.view-btn:hover + .view-dropdown-content {
+  display: block;
+}
+
+#createAccountButton,
+#accountActionButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 20px;
+}
+
+#createAccountButton {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#accountActionButton {
+  margin-right: 0;
+}
+
+#accountsForm {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#accountsForm .column {
+  flex: 0 0 48%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#accountsForm h3 {
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#accountsForm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#accountsForm input,
+#accountsForm select {
+  width: calc(100% - 20px);
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#accountsForm input[type='checkbox'] {
+  width: auto;
+  margin-right: 5px;
+}
+
+#accountsForm input:focus,
+#accountsForm select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+#accountsForm button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#accountsForm button:hover {
+  background-color: #45a049;
+}
+
+#contacts-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  z-index: 999;
+}
+
+.contact-filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body.contacts-open header {
+  background-color: #fff; /* Change background color to white */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add box-shadow for separation */
+  padding: 10px 0; /* Adjusted padding */
+}
+
+body.contacts-open .navbar-dark .navbar-toggler-icon {
+  background-color: #333; /* Adjusted color for the toggler icon */
+}
+
+body.contacts-open .nav-link {
+  color: #333; /* Adjusted color for navigation links */
+}
+
+body.contacts-open .navbar-toggler {
+  border-color: #333; /* Adjusted color for the toggler border */
+}
+
+#contactFilterButton,
+#contactRefreshButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#contactFilterButton img,
+#contactRefreshButton img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#contactRefreshButton:hover img {
+  filter: brightness(1.2);
+  transform: rotate(360deg);
+  transition: transform 0.3s ease;
+}
+
+.contact-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.contact-dropbtn {
+  background-color: #f4f4f4;
+  color: #333;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.contact-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 160px;
+}
+
+.contact-dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-bottom: 1px solid #ccc;
+}
+
+.contact-dropdown-content a:last-child {
+  border-bottom: none;
+}
+
+.contact-dropdown-content a:hover {
+  background-color: #f8f8f8;
+}
+
+.contact-dropdown:hover .contact-dropdown-content {
+  display: block;
+}
+
+.contact-view-dropdown,
+#contactRefreshButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.contact-view-dropdown img,
+#contactRefreshButton img {
+  width: 30px;
+  height: auto;
+  margin-right: 5px;
+}
+
+.contact-view-btn span {
+  margin-left: auto;
+}
+
+.contact-view-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.contact-view-dropdown-content a {
+  color: #333;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.contact-view-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.contact-view-btn:hover + .contact-view-dropdown-content {
+  display: block;
+}
+
+#createContactButton,
+#contactActionButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 20px;
+  margin-right: 20px;
+}
+
+#createContactButton {
+  position: fixed;
+  top: 120px;
+  right: 20px;
+  z-index: 1000;
+}
+
+#contactActionButton {
+  margin-right: 0;
+}
+
+#contactForm {
+  display: none;
+  max-width: 800px;
+  margin: 20px auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-height: 400px; /* Set a maximum height for the container */
+  overflow-y: auto;
+}
+
+#contactForm .column {
+  flex: 0 0 48%;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+#contactForm h3 {
+  color: #333;
+  border-bottom: 2px solid #333;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+
+#contactForm label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+#contactForm input,
+#contactForm select {
+  width: calc(100% - 20px); /* Adjust width as needed */
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease-in-out;
+}
+
+#contactForm input[type='checkbox'] {
+  width: auto;
+  margin-right: 5px;
+}
+
+#contactForm input:focus,
+#contactForm select:focus {
+  outline: none;
+  border-color: #4caf50;
+}
+
+#contactForm button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 18px;
+  width: 100%;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#contactForm button:hover {
+  background-color: #45a049;
+}
+.welcome-box {
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px; /* Adjust the width as needed */
+  animation: fadeIn 1s ease-out;
+  transition: transform 0.3s ease-out;
+}
+
+.welcome-box h1,
+.welcome-box h2 {
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.welcome-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Adjust styling for h2 tag */
+.welcome-box h2 {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.lead-list-header {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.lead-header-item {
+  flex: 1;
+  font-weight: bold;
+  text-align: center;
+}
+
+.lead-list {
+  margin-top: 10px;
+}
+
+.lead-item {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.lead-item:last-child {
+  border-bottom: none; /* Remove border for the last item */
+}
+
+.lead-name {
+  font-weight: bold;
+}
+
+.lead-details {
+  color: #777;
+}
+
+.lead-details span {
+  margin-right: 10px;
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+footer {
+  background-color: #333;
+  padding: 10px;
+  color: white;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+#deals-content {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  padding: 10px;
+  z-index: 999;
+}
+
+.filter-section {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body.deals-open header {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 10px 0;
+}
+
+body.deals-open .navbar-dark .navbar-toggler-icon {
+  background-color: #333;
+}
+
+body.deals-open .nav-link {
+  color: #333;
+}
+
+body.deals-open .navbar-toggler {
+  border-color: #333;
+}
+
+#dealFilterButton,
+#dealRefreshButton {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+#dealFilterButton img,
+#dealRefreshButton img {
+  width: 40px;
+  height: auto;
+  margin-right: 10px;
+}
+
+#dealRefreshButton:hover img {
+  filter: brightness(1.2);
+  transform: rotate(360deg);
+  transition: transform 0.3s ease;
+}
+
+.welcome-box:hover {
+  transform: scale(1.05);
+}
+
+/* Add these styles to your existing style tag or styles.css */
+
+/* Styling for the table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: 'Arial', sans-serif;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 15px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+/* Animated styling for the table */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Hover effect for table rows */
+tr:hover {
+  background-color: #f5f5f5;
+}
+
+/* Styling for form input fields */
+form input,
+form select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+}
+
+/* Styling for form labels */
+form label {
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* Button styles */
+button {
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #45a049;
+}
+
+/* Add more styles as needed */

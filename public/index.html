@@ -1,0 +1,1694 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styleguide.css" />
+
+    <style></style>
+    <title>Your Website</title>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-sm navbar-light bg-light">
+        <a class="navbar-brand" href="#"
+          ><img src="logo.png" alt="Logo" height="30"
+        /></a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#home-content">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#leads-content">Leads</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contacts-content">Contacts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#accounts-content">Accounts</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#deals-content">Deals</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#tasks-content">Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#campaigns-content">Campaign</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+   
+
+
+
+<div id="home-content" class="content-section">
+  <div class="welcome-container">
+    <div class="welcome-box">
+      <!-- Add h2 tag for "Leads" -->
+      <h2>Leads</h2>
+      <!-- Display leads list here -->
+      <div id="leads-list" class="lead-list">
+        <!-- Header for the leads list -->
+        <div class="lead-list-header">
+          <div class="lead-header-item">Company</div>
+          <div class="lead-header-item">Lead Owner</div>
+          <div class="lead-header-item">Email</div>
+          <div class="lead-header-item">Lead Source</div>
+          <!-- Add other lead form field names as needed -->
+        </div>
+        <!-- Individual lead items will be appended here dynamically -->
+      </div>
+    </div>
+     <div class="welcome-box">
+      <!-- Add h2 tag for "Leads" -->
+      <h2>contacts</h2>
+      <!-- Display leads list here -->
+      <div id="leads-list" class="lead-list">
+        <!-- Header for the leads list -->
+        <div class="lead-list-header">
+          <div class="lead-header-item">Company</div>
+          <div class="lead-header-item">Lead Owner</div>
+          <div class="lead-header-item">Email</div>
+          <div class="lead-header-item">Lead Source</div>
+          <!-- Add other lead form field names as needed -->
+        </div>
+        <!-- Individual lead items will be appended here dynamically -->
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  // Function to fetch leads and display them as a list
+  async function fetchAndDisplayLeadsAsList() {
+    try {
+      const response = await fetch('/leads');
+      if (!response.ok) {
+        throw new Error(`Failed to fetch leads. Status: ${response.status}`);
+      }
+
+      const leads = await response.json();
+      const leadsListContainer = document.getElementById('leads-list');
+      leadsListContainer.innerHTML = ''; // Clear existing list
+
+      // Inserting the header for the leads list
+      const leadListHeader = document.createElement('div');
+      leadListHeader.classList.add('lead-list-header');
+      leadListHeader.innerHTML = `
+        <div class="lead-header-item">Company</div>
+        <div class="lead-header-item">Lead Owner</div>
+        <div class="lead-header-item">Email</div>
+        <div class="lead-header-item">Lead Source</div>
+        <!-- Add other lead form field names as needed -->
+      `;
+      leadsListContainer.appendChild(leadListHeader);
+
+      leads.forEach((lead) => {
+        const leadItem = document.createElement('div');
+        leadItem.classList.add('lead-item');
+        leadItem.innerHTML = `
+          <div class="lead-name">${lead.company}</div>
+          <div class="lead-details">
+            <span>${lead.leadOwner}</span>
+            <span>${lead.email}</span>
+            <span>${lead.leadSource}</span>
+            <!-- Add other lead details as needed -->
+          </div>
+        `;
+
+        // Wrap the leadItem in an anchor tag
+        const leadLink = document.createElement('a');
+        leadLink.href = '#leads-section'; // Set the href attribute to the leads section's ID
+
+        leadLink.appendChild(leadItem);
+        leadsListContainer.appendChild(leadLink);
+      });
+    } catch (error) {
+      console.error('Error fetching and displaying leads:', error);
+    }
+  }
+
+  // Call the function to fetch and display leads as a list
+  fetchAndDisplayLeadsAsList();
+</script>
+    <div id="leads-content" class="content-section">
+      <div class="filter-section">
+        <button id="filterButton" class="btn btn-light">
+          <img src="img/icons8-filter-80.png" alt="Filter Icon" />
+        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropbtn">All Leads ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+          </div>
+        </div>
+        <button id="refreshButton" class="btn btn-light">
+          <img src="img/icons8-refresh-32.png" alt="Refresh Icon" />
+        </button>
+        <div class="view-dropdown">
+          <button class="btn btn-light view-btn" onclick="toggleView()">
+            <img src="img/icons8-filter-50.png" alt="View Button" />
+            <span>▼</span>
+          </button>
+          <div class="view-dropdown-content"></div>
+        </div>
+        <button id="createLeadButton" onclick="showLeadForm()">
+          Create a Lead
+        </button>
+        <button id="actionButton" onclick="performAction()">Action</button>
+      </div>
+      <!-- Add this HTML code before the "Create a Lead" button -->
+      <!-- Add this table to display lead details -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+      <!-- Replace your existing table with this Bootstrap table -->
+      <div
+        id="leads-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+      >
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+      <th>Lead Owner</th>
+      <th>Company</th>
+      
+      <th>Email</th>
+          <th>leadSource</th>
+    
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+          </thead>
+          <tbody id="leads-table-body"></tbody>
+        </table>
+      </div>
+
+      <div id="leadForm" style="display: none" class="container">
+        <form action="/leads" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Lead Information</h3>
+
+            <div class="form-group">
+              <label for="leadOwner">Lead Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leadOwner"
+                name="leadOwner"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="company">Company:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="company"
+                name="company"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="firstName">First Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="firstName"
+                name="firstName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Last Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="lastName"
+                name="lastName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="title"
+                name="title"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone:</label>
+              <input type="tel" class="form-control" id="phone" name="phone" />
+            </div>
+
+            <div class="form-group">
+              <label for="fax">Fax:</label>
+              <input type="tel" class="form-control" id="fax" name="fax" />
+            </div>
+
+            <div class="form-group">
+              <label for="mobile">Mobile:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="mobile"
+                name="mobile"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="website">Website:</label>
+              <input
+                type="url"
+                class="form-control"
+                id="website"
+                name="website"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="leadSource">Lead Source:</label>
+              <select class="form-control" id="leadSource" name="leadSource">
+                <option value="source1">Source 1</option>
+                <option value="source2">Source 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="leadStatus">Lead Status:</label>
+              <select class="form-control" id="leadStatus" name="leadStatus">
+                <option value="status1">Status 1</option>
+                <option value="status2">Status 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="industry">Industry:</label>
+              <select class="form-control" id="industry" name="industry">
+                <option value="industry1">Industry 1</option>
+                <option value="industry2">Industry 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="leadEmployees">Number of Employees:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="leadEmployees"
+                name="leadEmployees"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="leadIncome">Annual Income:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="leadIncome"
+                name="leadIncome"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="leadRating">Rating:</label>
+              <select class="form-control" id="leadRating" name="leadRating">
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="leadSecondaryEmail">Secondary Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="leadSecondaryEmail"
+                name="leadSecondaryEmail"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h3>Address Information</h3>
+
+            <div class="form-group">
+              <label for="street">Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="street"
+                name="street"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="city">City:</label>
+              <input type="text" class="form-control" id="city" name="city" />
+            </div>
+
+            <div class="form-group">
+              <label for="state">State:</label>
+              <input type="text" class="form-control" id="state" name="state" />
+            </div>
+
+            <div class="form-group">
+              <label for="zipCode">Zip Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="zipCode"
+                name="zipCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="country">Country:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="country"
+                name="country"
+              />
+            </div>
+
+            <!-- Add other address information fields with similar structure -->
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+
+ <div id="contacts-content" class="content-section">
+      <div class="filter-section">
+        <button id="filterButton" class="btn btn-light">
+          <img src="img/icons8-filter-80.png" alt="Filter Icon" />
+        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropbtn">All Contacts ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+          </div>
+        </div>
+        <button id="refreshButton" class="btn btn-light">
+          <img src="img/icons8-refresh-32.png" alt="Refresh Icon" />
+        </button>
+        <div class="view-dropdown">
+          <button class="btn btn-light view-btn" onclick="toggleView()">
+            <img src="img/icons8-filter-50.png" alt="View Button" />
+            <span>▼</span>
+          </button>
+          <div class="view-dropdown-content"></div>
+        </div>
+        <button id="createContactButton" onclick="showContactForm()">
+          Create a Contact
+        </button>
+        <button id="actionButton" onclick="performContactAction()">
+          Action
+        </button>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <div
+        id="contacts-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+      >
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Contact Owner</th>
+
+              <th>Account Name</th>
+              <th>Title</th>
+
+              <th>Department</th>
+
+              <th>Action</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody id="contacts-table-body"></tbody>
+        </table>
+      </div>
+
+      <div id="contactForm" style="display: none" class="container">
+        <form action="/contacts" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Contact Information</h3>
+
+            <div class="form-group">
+              <label for="contactOwner">Contact Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOwner"
+                name="contactOwner"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactFirstName">First Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactFirstName"
+                name="contactFirstName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactLastName">Last Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactLastName"
+                name="contactLastName"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactLeadSource">Lead Source:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactLeadSource"
+                name="contactLeadSource"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactAccountName">Account Name:</label>
+              <select
+                class="form-control"
+                id="contactAccountName"
+                name="contactAccountName"
+              >
+                <!-- Options will be dynamically populated here -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="contactTitle">Title:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactTitle"
+                name="contactTitle"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactEmail">Email:</label>
+              <input
+                type="email"
+                class="form-control"
+                id="contactEmail"
+                name="contactEmail"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactDepartment">Department:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactDepartment"
+                name="contactDepartment"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactPhone">Phone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactPhone"
+                name="contactPhone"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactHomePhone">Home Phone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactHomePhone"
+                name="contactHomePhone"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactOtherPhone">Other Phone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactOtherPhone"
+                name="contactOtherPhone"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactFax">Fax:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactFax"
+                name="contactFax"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMobile">Mobile:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactMobile"
+                name="contactMobile"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactDOB">Date of Birth:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="contactDOB"
+                name="contactDOB"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactAssistant">Assistant:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactAssistant"
+                name="contactAssistant"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactAssistantPhone">Assistant Phone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="contactAssistantPhone"
+                name="contactAssistantPhone"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h3>Address Information</h3>
+
+            <div class="form-group">
+              <label for="contactMailingStreet">Mailing Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactMailingStreet"
+                name="contactMailingStreet"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMailingCity">Mailing City:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactMailingCity"
+                name="contactMailingCity"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMailingState">Mailing State:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactMailingState"
+                name="contactMailingState"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMailingZip">Mailing Zip Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactMailingZip"
+                name="contactMailingZip"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactMailingCountry">Mailing Country:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactMailingCountry"
+                name="contactMailingCountry"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contactOtherStreet">Other Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOtherStreet"
+                name="contactOtherStreet"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactOtherCity">Other City:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOtherCity"
+                name="contactOtherCity"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactOtherState">Other State:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOtherState"
+                name="contactOtherState"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactOtherZip">Other Zip Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOtherZip"
+                name="contactOtherZip"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="contactOtherCountry">Other Country:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="contactOtherCountry"
+                name="contactOtherCountry"
+              />
+            </div>
+
+            <!-- Add other address information fields with similar structure -->
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+
+
+    <div id="deals-content" class="content-section">
+      <div class="filter-section">
+        <button id="dealFilterButton" class="btn btn-light">
+          <img src="img/icons8-filter-80.png" alt="Filter Icon" />
+        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropbtn">All Deals ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+          </div>
+        </div>
+        <button id="dealRefreshButton" class="btn btn-light">
+          <img src="img/icons8-refresh-32.png" alt="Refresh Icon" />
+        </button>
+        <div class="view-dropdown">
+          <button class="btn btn-light view-btn" onclick="toggleDealView()">
+            <img src="img/icons8-filter-50.png" alt="View Button" />
+            <span>▼</span>
+          </button>
+          <div class="view-dropdown-content"></div>
+        </div>
+        <button id="createDealButton" onclick="showDealForm()">
+          Create a Deal
+        </button>
+        <button id="dealActionButton" onclick="performDealAction()">
+          Action
+        </button>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <div
+        id="deals-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+      >
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Deal Owner</th>
+              <th>Deal Name</th>
+              <th>Account Name</th>
+
+              <th>Amount</th>
+
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="deals-table-body"></tbody>
+        </table>
+      </div>
+      <div id="dealForm" style="display: none" class="container">
+        <form action="/deals" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Deal Information</h3>
+
+            <div class="form-group">
+              <label for="dealOwner">Deal Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealOwner"
+                name="dealOwner"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealName">Deal Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealName"
+                name="dealName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealAccountName">Account Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealAccountName"
+                name="dealAccountName"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealType">Type:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealType"
+                name="dealType"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealNextStep">Next Step:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealNextStep"
+                name="dealNextStep"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealLeadSource">Lead Source:</label>
+              <select
+                class="form-control"
+                id="dealLeadSource"
+                name="dealLeadSource"
+              >
+                <option value="dealSource1">Source 1</option>
+                <option value="dealSource2">Source 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="dealContactName">Contact Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealContactName"
+                name="dealContactName"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealAmount">Amount:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealAmount"
+                name="dealAmount"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealClosingDate">Closing Date:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dealClosingDate"
+                name="dealClosingDate"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealStage">Stage:</label>
+              <select class="form-control" id="dealStage" name="dealStage">
+                <option value="dealStage1">Stage 1</option>
+                <option value="dealStage2">Stage 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h3>Additional Information</h3>
+
+            <div class="form-group">
+              <label for="dealProbability">Probability (%):</label>
+              <input
+                type="number"
+                class="form-control"
+                id="dealProbability"
+                name="dealProbability"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealExpectedRevenue">Expected Revenue:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealExpectedRevenue"
+                name="dealExpectedRevenue"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dealCampaignSource">Campaign Source:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="dealCampaignSource"
+                name="dealCampaignSource"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="tasks-content" class="content-section">
+      <div class="filter-section">
+        <!-- Filter, refresh, and view buttons -->
+        <button id="filterButton" class="btn btn-light">
+          <img src="img/icons8-filter-80.png" alt="Filter Icon" />
+        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropbtn">All Tasks ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+          </div>
+        </div>
+        <button id="refreshButton" class="btn btn-light">
+          <img src="img/icons8-refresh-32.png" alt="Refresh Icon" />
+        </button>
+        <div class="view-dropdown">
+          <button class="btn btn-light view-btn" onclick="toggleView()">
+            <img src="img/icons8-filter-50.png" alt="View Button" />
+            <span>▼</span>
+          </button>
+          <div class="view-dropdown-content"></div>
+        </div>
+        <button id="createTaskButton" onclick="showTaskForm()">
+          Create a Task
+        </button>
+        <button id="actionButton" onclick="performAction()">Action</button>
+      </div>
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <!-- Tasks Table -->
+      <div
+        id="tasks-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+      >
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Task Owner</th>
+              <th>Subject</th>
+              <th>Due Date</th>
+
+              <th>Status</th>
+
+              <th>Action</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody id="tasks-table-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Task Form -->
+      <div id="taskForm" style="display: none" class="container">
+        <form action="/tasks" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Task Information</h3>
+            <div class="form-group">
+              <label for="taskOwner">Task Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="taskOwner"
+                name="taskOwner"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="subject">Subject:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="subject"
+                name="subject"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <label for="dueDate">Due Date:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="dueDate"
+                name="dueDate"
+              />
+            </div>
+            <div class="form-group">
+              <label for="contact">Contact:</label>
+              <!-- Add a dropdown for contacts -->
+              <select class="form-control" id="contact" name="contact">
+                <option value="contact1">Contact 1</option>
+                <option value="contact2">Contact 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="account">Account:</label>
+              <!-- Add a dropdown for accounts -->
+              <select class="form-control" id="account" name="account">
+                <option value="account1">Account 1</option>
+                <option value="account2">Account 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="status">Status:</label>
+              <!-- Add a dropdown for task status -->
+              <select class="form-control" id="status" name="status">
+                <option value="status1">Status 1</option>
+                <option value="status2">Status 2</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <!-- Continue adding other form fields as needed -->
+            <div class="form-group">
+              <label for="priority">Priority:</label>
+              <!-- Add a dropdown for task priority -->
+              <select class="form-control" id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+                <!-- Add more options as needed -->
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Reminder:</label>
+              <!-- Add a switch for task reminder -->
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="reminder"
+                  name="reminder"
+                />
+                <label class="form-check-label" for="reminder"
+                  >Enable Reminder</label
+                >
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Repeat:</label>
+              <!-- Add a switch for task repeat -->
+              <div class="form-check form-switch">
+                <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="repeat"
+                  name="repeat"
+                />
+                <label class="form-check-label" for="repeat"
+                  >Enable Repeat</label
+                >
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+     <div id="campaigns-content" class="content-section">
+      <div class="filter-section">
+        <!-- Add your filter buttons and options here -->
+
+        <!-- Add this button to create a new campaign -->
+        <button id="createCampaignButton" onclick="showCampaignForm()">
+          Create a Campaign
+        </button>
+
+        <!-- Add other buttons as needed -->
+      </div>
+
+      <!-- Add this table to display campaign details -->
+      <div
+        id="campaigns-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+        class="container"
+      >
+        <h3>Campaigns</h3>
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Campaign Owner</th>
+              <th>Campaign Name</th>
+
+              <th>Start Date</th>
+              <th>End Date</th>
+
+              <th>Action</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody id="campaigns-table-body"></tbody>
+        </table>
+      </div>
+      <!-- Add this HTML code after the "Create a Lead" button in your existing code -->
+      <div id="campaignForm" style="display: none" class="container">
+        <form action="/campaigns" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Campaign Information</h3>
+
+            <div class="form-group">
+              <label for="campaignOwner">Campaign Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="campaignOwner"
+                name="campaignOwner"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="campaignName">Campaign Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="campaignName"
+                name="campaignName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="campaignType">Type:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="campaignType"
+                name="campaignType"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="campaignStatus">Status:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="campaignStatus"
+                name="campaignStatus"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="startDate">Start Date:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="startDate"
+                name="startDate"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="endDate">End Date:</label>
+              <input
+                type="date"
+                class="form-control"
+                id="endDate"
+                name="endDate"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expectedRevenue">Expected Revenue:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="expectedRevenue"
+                name="expectedRevenue"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="budgetedCost">Budgeted Cost:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="budgetedCost"
+                name="budgetedCost"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="actualCost">Actual Cost:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="actualCost"
+                name="actualCost"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expectedResponse">Expected Response:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="expectedResponse"
+                name="expectedResponse"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="numbersSent">Numbers Sent:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="numbersSent"
+                name="numbersSent"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+     <div id="accounts-content" class="content-section">
+      <div class="filter-section">
+        <!-- Filter and other buttons with unique IDs for the account section -->
+        <button id="accountFilterButton" class="btn btn-light">
+          <img src="img/icons8-filter-80.png" alt="Filter Icon" />
+        </button>
+        <div class="dropdown">
+          <button class="btn btn-secondary dropbtn">All Accounts ▼</button>
+          <div class="dropdown-content">
+            <a href="#">Option 1</a>
+            <a href="#">Option 2</a>
+            <a href="#">Option 3</a>
+          </div>
+        </div>
+        <button id="accountRefreshButton" class="btn btn-light">
+          <img src="img/icons8-refresh-32.png" alt="Refresh Icon" />
+        </button>
+        <div class="view-dropdown">
+          <button class="btn btn-light view-btn" onclick="toggleAccountView()">
+            <img src="img/icons8-filter-50.png" alt="View Button" />
+            <span>▼</span>
+          </button>
+          <div class="view-dropdown-content"></div>
+        </div>
+        <button id="createAccountButton" onclick="showAccountForm()">
+          Create an Account
+        </button>
+        <button id="accountActionButton" onclick="performAccountAction()">
+          Action
+        </button>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav>
+
+      <div
+        id="accounts-table"
+        style="display: none; max-height: 400px; overflow-y: auto"
+      >
+        <!-- Replace your existing table with this Bootstrap table -->
+        <table class="table table-bordered table-hover">
+          <thead class="thead-light">
+            <tr>
+              <th>Account Owner</th>
+              <th>Account Name</th>
+
+              <th>Phone</th>
+
+              <th>Website</th>
+
+              <th>Action</th>
+              <!-- Add more columns as needed -->
+            </tr>
+          </thead>
+          <tbody id="accounts-table-body"></tbody>
+        </table>
+      </div>
+      <div id="accountsForm" style="display: none" class="container">
+        <form action="/accounts" method="post" class="row">
+          <div class="col-md-6">
+            <h3>Account Information</h3>
+
+            <div class="form-group">
+              <label for="accountsAccountOwner">Account Owner:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAccountOwner"
+                name="accountsAccountOwner"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsAccountName">Account Name:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAccountName"
+                name="accountsAccountName"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsAccountSite">Account Site:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAccountSite"
+                name="accountsAccountSite"
+              />
+            </div>
+
+            <div class="form-group">
+             <div class="form-group">
+    <label for="accountsParentAccount">Parent Account:</label>
+    <select class="form-control" id="accountsParentAccount" name="accountsParentAccount">
+        <!-- Options will be dynamically populated here -->
+    </select>
+</div>
+
+            <div class="form-group">
+              <label for="accountsAccountNumber">Account Number:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAccountNumber"
+                name="accountsAccountNumber"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsAccountType">Account Type:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAccountType"
+                name="accountsAccountType"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsIndustry">Industry:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsIndustry"
+                name="accountsIndustry"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsAnnualRevenue">Annual Revenue:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsAnnualRevenue"
+                name="accountsAnnualRevenue"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsRating">Rating:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsRating"
+                name="accountsRating"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsPhone">Phone:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="accountsPhone"
+                name="accountsPhone"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsFax">Fax:</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="accountsFax"
+                name="accountsFax"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsWebsite">Website:</label>
+              <input
+                type="url"
+                class="form-control"
+                id="accountsWebsite"
+                name="accountsWebsite"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsTickerSymbol">Ticker Symbol:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsTickerSymbol"
+                name="accountsTickerSymbol"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsOwnership">Ownership:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsOwnership"
+                name="accountsOwnership"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsEmployees">Employees:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsEmployees"
+                name="accountsEmployees"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsSicCode">SIC Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsSicCode"
+                name="accountsSicCode"
+              />
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <h3>Address Information</h3>
+
+            <div class="form-group">
+              <label for="accountsBillingStreet">Billing Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsBillingStreet"
+                name="accountsBillingStreet"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsBillingCity">Billing City:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsBillingCity"
+                name="accountsBillingCity"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsBillingState">Billing State:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsBillingState"
+                name="accountsBillingState"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsBillingCode">Billing Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsBillingCode"
+                name="accountsBillingCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsBillingCountry">Billing Country:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsBillingCountry"
+                name="accountsBillingCountry"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsShippingStreet">Shipping Street:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsShippingStreet"
+                name="accountsShippingStreet"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsShippingCity">Shipping City:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsShippingCity"
+                name="accountsShippingCity"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsShippingState">Shipping State:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsShippingState"
+                name="accountsShippingState"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsShippingCode">Shipping Code:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsShippingCode"
+                name="accountsShippingCode"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="accountsShippingCountry">Shipping Country:</label>
+              <input
+                type="text"
+                class="form-control"
+                id="accountsShippingCountry"
+                name="accountsShippingCountry"
+              />
+            </div>
+
+            <!-- Add other address information fields with similar structure -->
+          </div>
+
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    
+    
+ <script src="script.js"></script>
+    <script src="contacts.js"></script>
+     <script src="accounts.js"></script>
+    <script src="deals.js"></script>
+        <script src="tasks.js"></script>
+          <script src="campaign.js"></script>
+
+    </body>
+    
+    </html>
